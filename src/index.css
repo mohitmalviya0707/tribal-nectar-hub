@@ -50,8 +50,8 @@ All colors MUST be HSL.
 
     --radius: 0.375rem;
     
-    /* Government Portal Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--gov-blue)), hsl(var(--gov-saffron)));
+    /* Simple Government Portal Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(25 95% 53%), hsl(134 61% 35%));
     --gradient-card: linear-gradient(180deg, hsl(var(--background)), hsl(210 20% 96%));
     --gradient-success: linear-gradient(135deg, hsl(var(--success)), hsl(134 61% 45%));
     
