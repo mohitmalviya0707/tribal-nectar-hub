@@ -90,9 +90,26 @@ const getPriorityColor = (priority: string) => {
   }
 };
 
-const OfficerDashboard = () => {
+import Header from "./Header";
+
+interface OfficerDashboardProps {
+  onBack: () => void;
+}
+
+const OfficerDashboard = ({ onBack }: OfficerDashboardProps) => {
   return (
-    <div className="space-y-8">
+    <div className="min-h-screen bg-gray-50">
+      <Header />
+      <div className="max-w-6xl mx-auto px-4 py-8">
+        <Button 
+          variant="outline" 
+          onClick={onBack}
+          className="mb-6"
+        >
+          ← वापस जाएं
+        </Button>
+        
+        <div className="space-y-8">
       {/* Officer Header */}
       <div className="bg-card border border-border rounded-lg p-6">
         <div className="flex items-center justify-between">
@@ -321,6 +338,8 @@ const OfficerDashboard = () => {
           </Card>
         </TabsContent>
       </Tabs>
+        </div>
+      </div>
     </div>
   );
 };
