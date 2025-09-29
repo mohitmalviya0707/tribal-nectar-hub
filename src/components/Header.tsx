@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Users } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const languages = [
   { code: "hi", name: "Hindi", native: "हिंदी" },
@@ -11,7 +11,7 @@ const languages = [
 ];
 
 const Header = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState("hi");
+  const { language, setLanguage, t } = useLanguage();
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-100">
@@ -23,13 +23,13 @@ const Header = () => {
               <Users className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-lg font-semibold text-gray-900">जनजातीय मामले पोर्टल</h1>
-              <p className="text-sm text-gray-600">भारत सरकार</p>
+              <h1 className="text-lg font-semibold text-gray-900">{t('title')}</h1>
+              <p className="text-sm text-gray-600">{t('subtitle')}</p>
             </div>
           </div>
 
           {/* Language Selector */}
-          <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
+          <Select value={language} onValueChange={setLanguage}>
             <SelectTrigger className="w-28 border-0 bg-transparent">
               <SelectValue />
             </SelectTrigger>

@@ -3,10 +3,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { FileText, MapPin, DollarSign, GraduationCap, Users, Droplets, Plus, Search } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import Header from "./Header";
 import CitizenLogin from "./CitizenLogin";
 import ApplicationForm from "./ApplicationForm";
 import ApplicationTracking from "./ApplicationTracking";
+import ApplicationSuccess from "./ApplicationSuccess";
 
 const schemes = [
   {
@@ -70,15 +72,16 @@ interface CitizenPortalProps {
 }
 
 const CitizenPortal = ({ onBack }: CitizenPortalProps) => {
-  const [currentView, setCurrentView] = useState<'dashboard' | 'login' | 'application' | 'tracking'>('dashboard');
+  const [currentView, setCurrentView] = useState<'dashboard' | 'login' | 'application' | 'tracking' | 'success'>('dashboard');
   const [newApplicationId, setNewApplicationId] = useState<string | null>(null);
+  const { t } = useLanguage();
   const handleLoginComplete = () => {
     setCurrentView('application');
   };
 
   const handleApplicationComplete = (applicationId: string) => {
     setNewApplicationId(applicationId);
-    setCurrentView('tracking');
+    setCurrentView('success');
   };
 
   const handleBackToDashboard = () => {
@@ -113,6 +116,15 @@ const CitizenPortal = ({ onBack }: CitizenPortalProps) => {
     );
   }
 
+  if (currentView === 'success') {
+    return (
+      <ApplicationSuccess 
+        applicationId={newApplicationId || ''}
+        onReturnToDashboard={handleBackToDashboard}
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
@@ -122,22 +134,22 @@ const CitizenPortal = ({ onBack }: CitizenPortalProps) => {
           onClick={onBack}
           className="mb-6"
         >
-          ← वापस जाएं
+          {t('backButton')}
         </Button>
         
         {/* Quick Actions */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-          <h2 className="text-2xl font-bold mb-6">नागरिक सेवाएं</h2>
+          <h2 className="text-2xl font-bold mb-6">{t('citizenServices')}</h2>
           <div className="grid md:grid-cols-2 gap-4 mb-8">
             <Card className="border-2 border-primary/20 hover:border-primary/40 transition-colors cursor-pointer"
                   onClick={() => setCurrentView('login')}>
               <CardContent className="p-6 text-center">
                 <Plus className="w-12 h-12 text-primary mx-auto mb-4" />
-                <h3 className="font-semibold text-lg mb-2">नया आवेदन</h3>
+                <h3 className="font-semibold text-lg mb-2">{t('newApplication')}</h3>
                 <p className="text-sm text-muted-foreground mb-4">
                   नई योजना के लिए आवेदन करें
                 </p>
-                <Button className="w-full">आवेदन शुरू करें</Button>
+                <Button className="w-full">{t('startApplication')}</Button>
               </CardContent>
             </Card>
             
@@ -145,18 +157,18 @@ const CitizenPortal = ({ onBack }: CitizenPortalProps) => {
                   onClick={() => setCurrentView('tracking')}>
               <CardContent className="p-6 text-center">
                 <Search className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-                <h3 className="font-semibold text-lg mb-2">आवेदन की स्थिति</h3>
+                <h3 className="font-semibold text-lg mb-2">{t('applicationStatus')}</h3>
                 <p className="text-sm text-muted-foreground mb-4">
                   अपने आवेदन की स्थिति जांचें
                 </p>
                 <Button variant="outline" className="w-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white">
-                  स्थिति देखें
+                  {t('checkStatus')}
                 </Button>
               </CardContent>
             </Card>
           </div>
           
-          <h3 className="text-xl font-semibold mb-4">उपलब्ध योजनाएं</h3>
+          <h3 className="text-xl font-semibold mb-4">{t('availableSchemes')}</h3>
           <div className="grid md:grid-cols-2 gap-6">
             {schemes.map((scheme) => (
               <Card key={scheme.id} className="hover:shadow-md transition-shadow">
@@ -176,7 +188,7 @@ const CitizenPortal = ({ onBack }: CitizenPortalProps) => {
                     className="w-full"
                     onClick={() => setCurrentView('login')}
                   >
-                    आवेदन करें
+                    {t('applyNow')}
                   </Button>
                 </CardContent>
               </Card>

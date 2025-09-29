@@ -91,6 +91,7 @@ const getPriorityColor = (priority: string) => {
 };
 
 import Header from "./Header";
+import InteractiveMap from "./InteractiveMap";
 
 interface OfficerDashboardProps {
   onBack: () => void;
@@ -296,15 +297,7 @@ const OfficerDashboard = ({ onBack }: OfficerDashboardProps) => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="h-96 bg-muted rounded-lg flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="w-12 h-12 text-muted-foreground mx-auto mb-2" />
-                  <p className="text-muted-foreground">Interactive Map Loading...</p>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Google Maps integration will be implemented here
-                  </p>
-                </div>
-              </div>
+              <InteractiveMap className="h-96" />
             </CardContent>
           </Card>
         </TabsContent>
