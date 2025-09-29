@@ -92,12 +92,19 @@ const getPriorityColor = (priority: string) => {
 
 import Header from "./Header";
 import InteractiveMap from "./InteractiveMap";
+import DocumentUpload from "./DocumentUpload";
+import AIDecisionSupport from "./AIDecisionSupport";
+import EnhancedMap from "./EnhancedMap";
+import ExportReports from "./ExportReports";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface OfficerDashboardProps {
   onBack: () => void;
 }
 
 const OfficerDashboard = ({ onBack }: OfficerDashboardProps) => {
+  const { t } = useLanguage();
+  
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
@@ -107,7 +114,7 @@ const OfficerDashboard = ({ onBack }: OfficerDashboardProps) => {
           onClick={onBack}
           className="mb-6"
         >
-          ← वापस जाएं
+          {t('backButton')}
         </Button>
         
         <div className="space-y-8">
@@ -156,12 +163,14 @@ const OfficerDashboard = ({ onBack }: OfficerDashboardProps) => {
       </div>
 
       {/* Main Dashboard Tabs */}
-      <Tabs defaultValue="applications" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="applications">Applications</TabsTrigger>
-          <TabsTrigger value="analytics">Analytics</TabsTrigger>
-          <TabsTrigger value="map">Land Records</TabsTrigger>
-          <TabsTrigger value="support">AI Support</TabsTrigger>
+        <Tabs defaultValue="applications" className="space-y-6">
+        <TabsList className="grid w-full grid-cols-6">
+          <TabsTrigger value="applications">{t('applications')}</TabsTrigger>
+          <TabsTrigger value="documents">{t('documentUpload')}</TabsTrigger>
+          <TabsTrigger value="analytics">{t('analytics')}</TabsTrigger>
+          <TabsTrigger value="map">{t('landRecords')}</TabsTrigger>
+          <TabsTrigger value="support">{t('aiSupport')}</TabsTrigger>
+          <TabsTrigger value="export">{t('exportReports')}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="applications" className="space-y-6">
@@ -169,7 +178,7 @@ const OfficerDashboard = ({ onBack }: OfficerDashboardProps) => {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <FileCheck className="w-5 h-5 mr-2" />
-                Pending Applications
+                {t('pendingApplications')}
               </CardTitle>
               <CardDescription>
                 Review and process tribal benefit applications
@@ -220,6 +229,10 @@ const OfficerDashboard = ({ onBack }: OfficerDashboardProps) => {
               </div>
             </CardContent>
           </Card>
+        </TabsContent>
+
+        <TabsContent value="documents">
+          <DocumentUpload />
         </TabsContent>
 
         <TabsContent value="analytics">
@@ -289,46 +302,15 @@ const OfficerDashboard = ({ onBack }: OfficerDashboardProps) => {
         </TabsContent>
 
         <TabsContent value="map">
-          <Card className="gov-card">
-            <CardHeader>
-              <CardTitle>Interactive Land Records Map</CardTitle>
-              <CardDescription>
-                Visualize land allocations, forest boundaries, and water bodies
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <InteractiveMap className="h-96" />
-            </CardContent>
-          </Card>
+          <EnhancedMap />
         </TabsContent>
 
         <TabsContent value="support">
-          <Card className="gov-card">
-            <CardHeader>
-              <CardTitle>AI Decision Support System</CardTitle>
-              <CardDescription>
-                Smart recommendations for application processing
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                  <h4 className="font-semibold text-blue-900 mb-2">AI Recommendations</h4>
-                  <ul className="space-y-2 text-sm text-blue-800">
-                    <li>• Application APP001: High approval probability (92%) - Land documents verified</li>
-                    <li>• Application APP003: Requires field verification - Conflicting boundaries detected</li>
-                    <li>• Fraud Alert: Similar applications from same location detected</li>
-                  </ul>
-                </div>
-                <div className="p-4 bg-muted rounded-lg">
-                  <p className="text-sm text-muted-foreground">
-                    The AI system analyzes application patterns, document authenticity, 
-                    and geographic data to provide smart recommendations for faster processing.
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <AIDecisionSupport />
+        </TabsContent>
+
+        <TabsContent value="export">
+          <ExportReports />
         </TabsContent>
       </Tabs>
         </div>

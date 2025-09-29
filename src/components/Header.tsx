@@ -4,7 +4,12 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 const languages = [
   { code: "hi", name: "Hindi", native: "हिंदी" },
-  { code: "en", name: "English", native: "English" }
+  { code: "en", name: "English", native: "English" },
+  { code: "mr", name: "Marathi", native: "मराठी" },
+  { code: "gu", name: "Gujarati", native: "ગુજરાતી" },
+  { code: "bn", name: "Bengali", native: "বাংলা" },
+  { code: "te", name: "Telugu", native: "తెలుగు" },
+  { code: "or", name: "Odia", native: "ଓଡ଼ିଆ" }
 ];
 
 const Header = () => {
