@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Zap, CheckCircle2, Users, TrendingUp, Target, Award } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import ChatBot from "@/components/ChatBot";
 import CitizenPortal from "@/components/CitizenPortal";
 import OfficerDashboard from "@/components/OfficerDashboard";
@@ -55,6 +56,7 @@ const footerLinks = {
 
 const Index = () => {
   const [userType, setUserType] = useState<'citizen' | 'officer' | null>(null);
+  const { t } = useLanguage();
 
   if (userType === 'citizen') {
     return <CitizenPortal onBack={() => setUserType(null)} />;
@@ -98,7 +100,7 @@ const Index = () => {
                   onClick={() => setUserType('citizen')}
                 >
                   <Users className="w-5 h-5 mr-2" />
-                  मैं एक नागरिक हूं
+                  {t('citizen')}
                 </Button>
                 <Button 
                   size="lg" 
@@ -106,7 +108,7 @@ const Index = () => {
                   className="bg-transparent border-white text-white hover:bg-white hover:text-primary"
                   onClick={() => setUserType('officer')}
                 >
-                  मैं एक अधिकारी हूं
+                  {t('officer')}
                 </Button>
               </div>
             </div>
@@ -138,7 +140,7 @@ const Index = () => {
                 </div>
                 <p className="text-gray-600 mb-4">{service.description}</p>
                 <Button className="w-full" onClick={() => setUserType('citizen')}>
-                  आवेदन करें
+                  {t('applyNow')}
                 </Button>
               </CardContent>
             </Card>
