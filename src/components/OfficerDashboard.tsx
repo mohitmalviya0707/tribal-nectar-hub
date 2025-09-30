@@ -122,19 +122,19 @@ const OfficerDashboard = ({ onBack }: OfficerDashboardProps) => {
       <div className="bg-card border border-border rounded-lg p-6">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-bold text-foreground">Officer Dashboard</h2>
+            <h2 className="text-2xl font-bold text-foreground">{t('officerDashboard')}</h2>
             <p className="text-muted-foreground">
-              Welcome back, manage tribal applications and land records
+              {t('welcomeBack')}
             </p>
           </div>
           <div className="flex space-x-3">
             <Button>
               <BarChart3 className="w-4 h-4 mr-2" />
-              Generate Report
+              {t('generateReport')}
             </Button>
             <Button variant="outline">
               <MapPin className="w-4 h-4 mr-2" />
-              Open Map View
+              {t('openMapView')}
             </Button>
           </div>
         </div>
@@ -181,7 +181,7 @@ const OfficerDashboard = ({ onBack }: OfficerDashboardProps) => {
                 {t('pendingApplications')}
               </CardTitle>
               <CardDescription>
-                Review and process tribal benefit applications
+                {t('reviewAndProcess')}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -197,30 +197,30 @@ const OfficerDashboard = ({ onBack }: OfficerDashboardProps) => {
                           </Badge>
                         </div>
                         <p className="text-sm text-muted-foreground">
-                          <strong>Scheme:</strong> {app.scheme}
+                          <strong>{t('scheme')}:</strong> {app.scheme}
                         </p>
                         <p className="text-sm text-muted-foreground">
-                          <strong>Location:</strong> {app.village}, {app.district}, {app.state}
+                          <strong>{t('location')}:</strong> {app.village}, {app.district}, {app.state}
                         </p>
                         <p className="text-sm text-muted-foreground">
-                          <strong>Land Area:</strong> {app.landArea}
+                          <strong>{t('landArea')}:</strong> {app.landArea}
                         </p>
                         <p className="text-sm text-muted-foreground">
-                          <strong>Submitted:</strong> {app.submittedDate}
+                          <strong>{t('submitted')}:</strong> {app.submittedDate}
                         </p>
                       </div>
                       <div className="flex space-x-2">
                         <Button size="sm" variant="outline">
                           <Eye className="w-4 h-4 mr-1" />
-                          Review
+                          {t('review')}
                         </Button>
                         <Button size="sm" variant="default">
                           <CheckCircle className="w-4 h-4 mr-1" />
-                          Approve
+                          {t('approve')}
                         </Button>
                         <Button size="sm" variant="destructive">
                           <XCircle className="w-4 h-4 mr-1" />
-                          Reject
+                          {t('reject')}
                         </Button>
                       </div>
                     </div>
@@ -238,18 +238,18 @@ const OfficerDashboard = ({ onBack }: OfficerDashboardProps) => {
         <TabsContent value="analytics">
           <Card className="gov-card">
             <CardHeader>
-              <CardTitle>Analytics & Reports</CardTitle>
+              <CardTitle>{t('analyticsReports')}</CardTitle>
               <CardDescription>
-                Comprehensive analysis of tribal applications and demographics
+                {t('comprehensiveAnalysis')}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">
-                  <h4 className="font-semibold">Application Status Distribution</h4>
+                  <h4 className="font-semibold">{t('statusDistribution')}</h4>
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm">Approved</span>
+                      <span className="text-sm">{t('approved')}</span>
                       <span className="text-sm font-medium">65%</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
@@ -258,7 +258,7 @@ const OfficerDashboard = ({ onBack }: OfficerDashboardProps) => {
                   </div>
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm">Pending</span>
+                      <span className="text-sm">{t('pendingApplications')}</span>
                       <span className="text-sm font-medium">25%</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
@@ -267,7 +267,7 @@ const OfficerDashboard = ({ onBack }: OfficerDashboardProps) => {
                   </div>
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm">Rejected</span>
+                      <span className="text-sm">{t('rejected')}</span>
                       <span className="text-sm font-medium">10%</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
@@ -276,22 +276,22 @@ const OfficerDashboard = ({ onBack }: OfficerDashboardProps) => {
                   </div>
                 </div>
                 <div className="space-y-4">
-                  <h4 className="font-semibold">State-wise Applications</h4>
+                  <h4 className="font-semibold">{t('stateWiseApplications')}</h4>
                   <div className="space-y-3">
                     <div className="flex justify-between">
-                      <span className="text-sm">Madhya Pradesh</span>
+                      <span className="text-sm">{t('madhyaPradesh')}</span>
                       <Badge variant="secondary">142</Badge>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm">Rajasthan</span>
+                      <span className="text-sm">{t('rajasthan')}</span>
                       <Badge variant="secondary">98</Badge>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm">Gujarat</span>
+                      <span className="text-sm">{t('gujarat')}</span>
                       <Badge variant="secondary">76</Badge>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm">Odisha</span>
+                      <span className="text-sm">{t('odisha')}</span>
                       <Badge variant="secondary">54</Badge>
                     </div>
                   </div>

@@ -8,55 +8,46 @@ import ChatBot from "@/components/ChatBot";
 import CitizenPortal from "@/components/CitizenPortal";
 import OfficerDashboard from "@/components/OfficerDashboard";
 
-const services = [
-  {
-    id: 1,
-    title: "भूमि अधिकार",
-    titleEn: "Land Rights",
-    description: "भूमि पट्टा, स्वामित्व दस्तावेज और भूमि रिकॉर्ड सत्यापन के लिए आवेदन करें",
-    icon: <MapPin className="w-6 h-6" />,
-    color: "border-l-orange-500",
-    badge: "Forest Rights Act",
-    badgeColor: "bg-green-600"
-  },
-  {
-    id: 2,
-    title: "PM Kisan Yojana",
-    titleEn: "PM Kisan Yojana", 
-    description: "Direct benefit transfer for farmers with ₹6,000 annual support",
-    icon: <Zap className="w-6 h-6" />,
-    color: "border-l-green-500",
-    badge: "₹6,000/year",
-    badgeColor: "bg-green-600"
-  },
-  {
-    id: 3,
-    title: "Jal Jeevan Mission",
-    titleEn: "Jal Jeevan Mission",
-    description: "Clean drinking water connection for every tribal household", 
-    icon: <CheckCircle2 className="w-6 h-6" />,
-    color: "border-l-blue-500",
-    badge: "Water Connection",
-    badgeColor: "bg-green-600"
-  }
-];
-
-const stats = [
-  { value: "15.2L+", label: "Applications Processed", color: "text-orange-600" },
-  { value: "8.5L+", label: "Land Pattas Approved", color: "text-green-600" },
-  { value: "25.8L+", label: "Beneficiaries Enrolled", color: "text-blue-600" },
-  { value: "99.2%", label: "Digital Accuracy", color: "text-orange-600" }
-];
-
-const footerLinks = {
-  "त्वरित लिंक": ["PM Kisan Yojana", "Jal Jeevan Mission", "Land Records"],
-  "सहायता": ["Help Center", "Contact Us", "FAQs"],
-  "सरकार": ["Ministry of Tribal Affairs", "Digital India", "MyGov"]
-};
-
 const Index = () => {
   const [userType, setUserType] = useState<'citizen' | 'officer' | null>(null);
   const { t } = useLanguage();
+
+  const services = [
+    {
+      id: 1,
+      titleKey: "landRights",
+      descKey: "landRightsDesc",
+      icon: <MapPin className="w-6 h-6" />,
+      color: "border-l-orange-500",
+      badgeKey: "forestRightsAct",
+      badgeColor: "bg-green-600"
+    },
+    {
+      id: 2,
+      titleKey: "pmKisan",
+      descKey: "pmKisanDesc",
+      icon: <Zap className="w-6 h-6" />,
+      color: "border-l-green-500",
+      badgeKey: "perYear",
+      badgeColor: "bg-green-600"
+    },
+    {
+      id: 3,
+      titleKey: "jalJivan",
+      descKey: "jalJeevanDesc",
+      icon: <CheckCircle2 className="w-6 h-6" />,
+      color: "border-l-blue-500",
+      badgeKey: "waterConnection",
+      badgeColor: "bg-green-600"
+    }
+  ];
+
+  const stats = [
+    { value: "15.2L+", labelKey: "applicationsProcessed", color: "text-orange-600" },
+    { value: "8.5L+", labelKey: "landPattasApproved", color: "text-green-600" },
+    { value: "25.8L+", labelKey: "beneficiariesEnrolled", color: "text-blue-600" },
+    { value: "99.2%", labelKey: "digitalAccuracy", color: "text-orange-600" }
+  ];
 
   if (userType === 'citizen') {
     return <CitizenPortal onBack={() => setUserType(null)} />;
@@ -77,20 +68,19 @@ const Index = () => {
             <div className="text-white">
               <div className="mb-6">
                 <span className="bg-white/20 text-white px-4 py-2 rounded-full text-sm">
-                  भारत सरकार की पहल
+                  {t('govInitiative')}
                 </span>
               </div>
               
               <h1 className="text-4xl md:text-6xl font-bold mb-4">
-                जनजातीय मामले
+                {t('tribalAffairs')}
               </h1>
               <h2 className="text-3xl md:text-5xl font-bold mb-8 text-yellow-200">
-                डिजिटल पोर्टल
+                {t('digitalPortal')}
               </h2>
               
               <p className="text-lg md:text-xl mb-8 text-white/90 max-w-3xl">
-                डिजिटल गवर्नेंस के माध्यम से जनजातीय समुदायों को सशक्त बनाना। भूमि अधिकार, सरकारी 
-                लाभ के लिए आवेदन करें और अपने आवेदन को सहजता से ट्रैक करें।
+                {t('heroDescription')}
               </p>
               
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
@@ -119,9 +109,9 @@ const Index = () => {
       {/* Services Section */}
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">उपलब्ध सेवाएं</h2>
+          <h2 className="text-3xl font-bold mb-4">{t('availableServices')}</h2>
           <p className="text-gray-600 max-w-3xl mx-auto">
-            जनजातीय समुदायों के लिए विशेष रूप से डिजाइन की गई सरकारी योजनाओं और सेवाओं का उपयोग करें
+            {t('servicesDescription')}
           </p>
         </div>
 
@@ -132,13 +122,13 @@ const Index = () => {
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-3">
                     {service.icon}
-                    <h3 className="font-semibold text-lg">{service.title}</h3>
+                    <h3 className="font-semibold text-lg">{t(service.titleKey as any)}</h3>
                   </div>
                   <span className={`px-3 py-1 text-xs text-white rounded-full ${service.badgeColor}`}>
-                    {service.badge}
+                    {t(service.badgeKey as any)}
                   </span>
                 </div>
-                <p className="text-gray-600 mb-4">{service.description}</p>
+                <p className="text-gray-600 mb-4">{t(service.descKey as any)}</p>
                 <Button className="w-full" onClick={() => setUserType('citizen')}>
                   {t('applyNow')}
                 </Button>
@@ -155,7 +145,7 @@ const Index = () => {
                 {stat.value}
               </div>
               <div className="text-gray-600 text-sm">
-                {stat.label}
+                {t(stat.labelKey as any)}
               </div>
             </div>
           ))}
@@ -166,20 +156,30 @@ const Index = () => {
       <footer className="bg-white border-t border-gray-200">
         <div className="max-w-6xl mx-auto px-4 py-12">
           <div className="grid md:grid-cols-3 gap-8">
-            {Object.entries(footerLinks).map(([category, links]) => (
-              <div key={category}>
-                <h3 className="font-semibold mb-4">{category}</h3>
-                <ul className="space-y-2">
-                  {links.map((link) => (
-                    <li key={link}>
-                      <a href="#" className="text-gray-600 hover:text-primary transition-colors text-sm">
-                        {link}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            <div>
+              <h3 className="font-semibold mb-4">{t('quickLinks')}</h3>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-gray-600 hover:text-primary transition-colors text-sm">PM Kisan Yojana</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-primary transition-colors text-sm">Jal Jeevan Mission</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-primary transition-colors text-sm">{t('landRecords')}</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">{t('support')}</h3>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-gray-600 hover:text-primary transition-colors text-sm">{t('helpCenter')}</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-primary transition-colors text-sm">{t('contactUs')}</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-primary transition-colors text-sm">{t('faqs')}</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">{t('government')}</h3>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-gray-600 hover:text-primary transition-colors text-sm">{t('ministryTribal')}</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-primary transition-colors text-sm">{t('digitalIndia')}</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-primary transition-colors text-sm">{t('myGov')}</a></li>
+              </ul>
+            </div>
           </div>
         </div>
       </footer>

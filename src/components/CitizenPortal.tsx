@@ -147,7 +147,7 @@ const CitizenPortal = ({ onBack }: CitizenPortalProps) => {
                 <Plus className="w-12 h-12 text-primary mx-auto mb-4" />
                 <h3 className="font-semibold text-lg mb-2">{t('newApplication')}</h3>
                 <p className="text-sm text-muted-foreground mb-4">
-                  नई योजना के लिए आवेदन करें
+                  {t('newSchemeApplication')}
                 </p>
                 <Button className="w-full">{t('startApplication')}</Button>
               </CardContent>
@@ -159,7 +159,7 @@ const CitizenPortal = ({ onBack }: CitizenPortalProps) => {
                 <Search className="w-12 h-12 text-blue-600 mx-auto mb-4" />
                 <h3 className="font-semibold text-lg mb-2">{t('applicationStatus')}</h3>
                 <p className="text-sm text-muted-foreground mb-4">
-                  अपने आवेदन की स्थिति जांचें
+                  {t('checkYourApplication')}
                 </p>
                 <Button variant="outline" className="w-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white">
                   {t('checkStatus')}
