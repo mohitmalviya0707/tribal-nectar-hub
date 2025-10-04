@@ -7,9 +7,10 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import ChatBot from "@/components/ChatBot";
 import CitizenPortal from "@/components/CitizenPortal";
 import OfficerDashboard from "@/components/OfficerDashboard";
+import OfficerLogin from "@/components/OfficerLogin";
 
 const Index = () => {
-  const [userType, setUserType] = useState<'citizen' | 'officer' | null>(null);
+  const [userType, setUserType] = useState<'citizen' | 'officer' | 'officer-login' | null>(null);
   const { t } = useLanguage();
 
   const services = [
@@ -51,6 +52,10 @@ const Index = () => {
 
   if (userType === 'citizen') {
     return <CitizenPortal onBack={() => setUserType(null)} />;
+  }
+
+  if (userType === 'officer-login') {
+    return <OfficerLogin onBack={() => setUserType(null)} onLogin={() => setUserType('officer')} />;
   }
 
   if (userType === 'officer') {
@@ -96,7 +101,7 @@ const Index = () => {
                   size="lg" 
                   variant="outline" 
                   className="bg-transparent border-white text-white hover:bg-white hover:text-primary"
-                  onClick={() => setUserType('officer')}
+                  onClick={() => setUserType('officer-login')}
                 >
                   {t('officer')}
                 </Button>
