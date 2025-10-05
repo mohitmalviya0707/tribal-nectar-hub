@@ -141,7 +141,8 @@ const translations = {
     madhyaPradesh: "Madhya Pradesh",
     rajasthan: "Rajasthan",
     gujarat: "Gujarat",
-    odisha: "Odisha"
+    odisha: "Odisha",
+    monthlyComparison: "Monthly Comparison"
   },
   hi: {
     title: "जनजातीय मामले पोर्टल",
@@ -283,7 +284,8 @@ const translations = {
     madhyaPradesh: "मध्य प्रदेश",
     rajasthan: "राजस्थान",
     gujarat: "गुजरात",
-    odisha: "ओडिशा"
+    odisha: "ओडिशा",
+    monthlyComparison: "मासिक तुलना"
   },
   mr: {
     title: "आदिवासी व्यवहार पोर्टल",
@@ -425,6 +427,7 @@ const translations = {
     rajasthan: "राजस्थान",
     gujarat: "गुजरात",
     odisha: "ओडिशा",
+    monthlyComparison: "मासिक तुलना",
     pmKisan: "PM किसान योजना",
     jalJivan: "जल जीवन मिशन"
   },
@@ -568,6 +571,7 @@ const translations = {
     rajasthan: "રાજસ્થાન",
     gujarat: "ગુજરાત",
     odisha: "ઓડિશા",
+    monthlyComparison: "માસિક સરખામણી",
     pmKisan: "PM કિસાન યોજના",
     jalJivan: "જલ જીવન મિશન"
   },
@@ -711,6 +715,7 @@ const translations = {
     rajasthan: "রাজস্থান",
     gujarat: "গুজরাট",
     odisha: "ওড়িশা",
+    monthlyComparison: "মাসিক তুলনা",
     pmKisan: "PM কিষাণ যোজনা",
     jalJivan: "জল জীবন মিশন"
   },
@@ -854,6 +859,7 @@ const translations = {
     rajasthan: "రాజస్థాన్",
     gujarat: "గుజరాత్",
     odisha: "ఒడిశా",
+    monthlyComparison: "నెలవారీ పోలిక",
     pmKisan: "PM కిసాన్ యోజన",
     jalJivan: "జల జీవన్ మిషన్"
   },
@@ -997,6 +1003,7 @@ const translations = {
     rajasthan: "ରାଜସ୍ଥାନ",
     gujarat: "ଗୁଜରାଟ",
     odisha: "ଓଡ଼ିଶା",
+    monthlyComparison: "ମାସିକ ତୁଳନା",
     pmKisan: "PM କିଷାଣ ଯୋଜନା",
     jalJivan: "ଜଳ ଜୀବନ ମିଶନ"
   }

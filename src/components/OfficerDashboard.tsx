@@ -262,69 +262,262 @@ const OfficerDashboard = ({ onBack }: OfficerDashboardProps) => {
               )}
 
               {activeView === 'analytics' && (
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{t('analyticsReports')}</CardTitle>
-                    <CardDescription>
-                      {t('comprehensiveAnalysis')}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-6">
+                  {/* Monthly Data Comparison */}
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center">
+                        <BarChart3 className="w-5 h-5 mr-2" />
+                        {t('monthlyComparison')}
+                      </CardTitle>
+                      <CardDescription>
+                        Application trends over last 6 months
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
                       <div className="space-y-4">
-                        <h4 className="font-semibold">{t('statusDistribution')}</h4>
-                        <div className="space-y-2">
-                          <div className="flex justify-between items-center">
-                            <span className="text-sm">{t('approved')}</span>
-                            <span className="text-sm font-medium">65%</span>
+                        {[
+                          { month: 'Oct', approved: 45, rejected: 8, pending: 52 },
+                          { month: 'Nov', approved: 52, rejected: 6, pending: 48 },
+                          { month: 'Dec', approved: 61, rejected: 7, pending: 45 },
+                          { month: 'Jan', approved: 73, rejected: 5, pending: 42 },
+                          { month: 'Feb', approved: 68, rejected: 9, pending: 38 },
+                          { month: 'Mar', approved: 89, rejected: 15, pending: 35 }
+                        ].map((data, idx) => (
+                          <div key={idx} className="space-y-2">
+                            <div className="flex justify-between items-center">
+                              <span className="text-sm font-medium">{data.month}</span>
+                              <div className="flex gap-4 text-xs">
+                                <span className="text-green-600">✓ {data.approved}</span>
+                                <span className="text-red-600">✗ {data.rejected}</span>
+                                <span className="text-yellow-600">⏳ {data.pending}</span>
+                              </div>
+                            </div>
+                            <div className="w-full bg-muted rounded-full h-2 flex overflow-hidden">
+                              <div 
+                                className="bg-green-600 h-2" 
+                                style={{ width: `${(data.approved / (data.approved + data.rejected + data.pending)) * 100}%` }}
+                              ></div>
+                              <div 
+                                className="bg-red-600 h-2" 
+                                style={{ width: `${(data.rejected / (data.approved + data.rejected + data.pending)) * 100}%` }}
+                              ></div>
+                              <div 
+                                className="bg-yellow-600 h-2" 
+                                style={{ width: `${(data.pending / (data.approved + data.rejected + data.pending)) * 100}%` }}
+                              ></div>
+                            </div>
                           </div>
-                          <div className="w-full bg-muted rounded-full h-2">
-                            <div className="bg-green-600 h-2 rounded-full w-[65%]"></div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Benefits by Category */}
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center">
+                        <FileText className="w-5 h-5 mr-2" />
+                        Benefits by Category
+                      </CardTitle>
+                      <CardDescription>
+                        Distribution of benefits across different categories
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-4">
+                          <h4 className="font-semibold">Land Benefits</h4>
+                          <div className="space-y-3">
+                            <div>
+                              <div className="flex justify-between mb-1">
+                                <span className="text-sm">Individual Land Rights</span>
+                                <Badge variant="secondary">₹45.2 Cr</Badge>
+                              </div>
+                              <div className="w-full bg-muted rounded-full h-2">
+                                <div className="bg-primary h-2 rounded-full w-[75%]"></div>
+                              </div>
+                            </div>
+                            <div>
+                              <div className="flex justify-between mb-1">
+                                <span className="text-sm">Community Land Rights</span>
+                                <Badge variant="secondary">₹28.6 Cr</Badge>
+                              </div>
+                              <div className="w-full bg-muted rounded-full h-2">
+                                <div className="bg-primary h-2 rounded-full w-[48%]"></div>
+                              </div>
+                            </div>
+                            <div>
+                              <div className="flex justify-between mb-1">
+                                <span className="text-sm">Forest Rights</span>
+                                <Badge variant="secondary">₹18.4 Cr</Badge>
+                              </div>
+                              <div className="w-full bg-muted rounded-full h-2">
+                                <div className="bg-primary h-2 rounded-full w-[31%]"></div>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                        <div className="space-y-2">
-                          <div className="flex justify-between items-center">
-                            <span className="text-sm">{t('pendingApplications')}</span>
-                            <span className="text-sm font-medium">25%</span>
-                          </div>
-                          <div className="w-full bg-muted rounded-full h-2">
-                            <div className="bg-yellow-600 h-2 rounded-full w-[25%]"></div>
-                          </div>
-                        </div>
-                        <div className="space-y-2">
-                          <div className="flex justify-between items-center">
-                            <span className="text-sm">{t('rejected')}</span>
-                            <span className="text-sm font-medium">10%</span>
-                          </div>
-                          <div className="w-full bg-muted rounded-full h-2">
-                            <div className="bg-red-600 h-2 rounded-full w-[10%]"></div>
+                        <div className="space-y-4">
+                          <h4 className="font-semibold">Welfare Benefits</h4>
+                          <div className="space-y-3">
+                            <div>
+                              <div className="flex justify-between mb-1">
+                                <span className="text-sm">Healthcare</span>
+                                <Badge variant="secondary">₹12.8 Cr</Badge>
+                              </div>
+                              <div className="w-full bg-muted rounded-full h-2">
+                                <div className="bg-green-600 h-2 rounded-full w-[65%]"></div>
+                              </div>
+                            </div>
+                            <div>
+                              <div className="flex justify-between mb-1">
+                                <span className="text-sm">Education</span>
+                                <Badge variant="secondary">₹9.5 Cr</Badge>
+                              </div>
+                              <div className="w-full bg-muted rounded-full h-2">
+                                <div className="bg-green-600 h-2 rounded-full w-[48%]"></div>
+                              </div>
+                            </div>
+                            <div>
+                              <div className="flex justify-between mb-1">
+                                <span className="text-sm">Livelihood</span>
+                                <Badge variant="secondary">₹15.3 Cr</Badge>
+                              </div>
+                              <div className="w-full bg-muted rounded-full h-2">
+                                <div className="bg-green-600 h-2 rounded-full w-[78%]"></div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
-                      <div className="space-y-4">
-                        <h4 className="font-semibold">{t('stateWiseApplications')}</h4>
-                        <div className="space-y-3">
-                          <div className="flex justify-between">
-                            <span className="text-sm">{t('madhyaPradesh')}</span>
-                            <Badge variant="secondary">142</Badge>
+                    </CardContent>
+                  </Card>
+
+                  {/* Scheme-wise Data */}
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center">
+                        <FileCheck className="w-5 h-5 mr-2" />
+                        Scheme-wise Applications
+                      </CardTitle>
+                      <CardDescription>
+                        Application distribution across government schemes
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-6">
+                        {[
+                          { scheme: 'Forest Rights Act 2006', total: 856, approved: 612, pending: 187, rejected: 57, budget: '₹125 Cr' },
+                          { scheme: 'PM Kisan', total: 642, approved: 543, pending: 78, rejected: 21, budget: '₹86 Cr' },
+                          { scheme: 'Jal Jivan Mission', total: 423, approved: 312, pending: 89, rejected: 22, budget: '₹54 Cr' },
+                          { scheme: 'MGNREGA', total: 789, approved: 621, pending: 142, rejected: 26, budget: '₹98 Cr' },
+                          { scheme: 'PM Awas Yojana', total: 512, approved: 398, pending: 96, rejected: 18, budget: '₹72 Cr' }
+                        ].map((scheme, idx) => (
+                          <div key={idx} className="border-b pb-4 last:border-b-0">
+                            <div className="flex justify-between items-start mb-3">
+                              <div>
+                                <h4 className="font-semibold">{scheme.scheme}</h4>
+                                <p className="text-xs text-muted-foreground">Budget Allocation: {scheme.budget}</p>
+                              </div>
+                              <Badge variant="outline">{scheme.total} Total</Badge>
+                            </div>
+                            <div className="grid grid-cols-3 gap-4 mb-2 text-xs">
+                              <div>
+                                <span className="text-green-600">Approved: {scheme.approved}</span>
+                              </div>
+                              <div>
+                                <span className="text-yellow-600">Pending: {scheme.pending}</span>
+                              </div>
+                              <div>
+                                <span className="text-red-600">Rejected: {scheme.rejected}</span>
+                              </div>
+                            </div>
+                            <div className="w-full bg-muted rounded-full h-2 flex overflow-hidden">
+                              <div 
+                                className="bg-green-600 h-2" 
+                                style={{ width: `${(scheme.approved / scheme.total) * 100}%` }}
+                              ></div>
+                              <div 
+                                className="bg-yellow-600 h-2" 
+                                style={{ width: `${(scheme.pending / scheme.total) * 100}%` }}
+                              ></div>
+                              <div 
+                                className="bg-red-600 h-2" 
+                                style={{ width: `${(scheme.rejected / scheme.total) * 100}%` }}
+                              ></div>
+                            </div>
                           </div>
-                          <div className="flex justify-between">
-                            <span className="text-sm">{t('rajasthan')}</span>
-                            <Badge variant="secondary">98</Badge>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Original Status Distribution and State-wise */}
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>{t('analyticsReports')}</CardTitle>
+                      <CardDescription>
+                        {t('comprehensiveAnalysis')}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-4">
+                          <h4 className="font-semibold">{t('statusDistribution')}</h4>
+                          <div className="space-y-2">
+                            <div className="flex justify-between items-center">
+                              <span className="text-sm">{t('approved')}</span>
+                              <span className="text-sm font-medium">65%</span>
+                            </div>
+                            <div className="w-full bg-muted rounded-full h-2">
+                              <div className="bg-green-600 h-2 rounded-full w-[65%]"></div>
+                            </div>
                           </div>
-                          <div className="flex justify-between">
-                            <span className="text-sm">{t('gujarat')}</span>
-                            <Badge variant="secondary">76</Badge>
+                          <div className="space-y-2">
+                            <div className="flex justify-between items-center">
+                              <span className="text-sm">{t('pendingApplications')}</span>
+                              <span className="text-sm font-medium">25%</span>
+                            </div>
+                            <div className="w-full bg-muted rounded-full h-2">
+                              <div className="bg-yellow-600 h-2 rounded-full w-[25%]"></div>
+                            </div>
                           </div>
-                          <div className="flex justify-between">
-                            <span className="text-sm">{t('odisha')}</span>
-                            <Badge variant="secondary">54</Badge>
+                          <div className="space-y-2">
+                            <div className="flex justify-between items-center">
+                              <span className="text-sm">{t('rejected')}</span>
+                              <span className="text-sm font-medium">10%</span>
+                            </div>
+                            <div className="w-full bg-muted rounded-full h-2">
+                              <div className="bg-red-600 h-2 rounded-full w-[10%]"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="space-y-4">
+                          <h4 className="font-semibold">{t('stateWiseApplications')}</h4>
+                          <div className="space-y-3">
+                            <div className="flex justify-between">
+                              <span className="text-sm">{t('madhyaPradesh')}</span>
+                              <Badge variant="secondary">142</Badge>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-sm">{t('rajasthan')}</span>
+                              <Badge variant="secondary">98</Badge>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-sm">{t('gujarat')}</span>
+                              <Badge variant="secondary">76</Badge>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-sm">{t('odisha')}</span>
+                              <Badge variant="secondary">54</Badge>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                </div>
               )}
 
               {activeView === 'map' && (

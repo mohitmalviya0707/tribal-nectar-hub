@@ -44,11 +44,14 @@ const EnhancedMap = ({ className = "w-full h-96" }: EnhancedMapProps) => {
   useEffect(() => {
     if (!isLoaded || !mapContainer.current || !window.google) return;
 
-    // Initialize enhanced map
+    // Initialize enhanced 3D map
     map.current = new window.google.maps.Map(mapContainer.current, {
       zoom: 8,
       center: { lat: 23.5937, lng: 78.9629 },
       mapTypeId: window.google.maps.MapTypeId.SATELLITE,
+      tilt: 45, // Enable 3D view
+      heading: 0,
+      mapId: 'DEMO_MAP_ID', // Required for 3D features
       styles: [
         {
           featureType: "all",
